@@ -1,0 +1,37 @@
+<!-- Code to display mapt and neighbor hood places as list-->
+<html>
+ <head>
+ <!-- styles put here, but you can include a CSS file and reference it instead! -->
+   <style type="text/css">
+     html, body { height: 100%; margin: 0; padding: 0; }
+     #map { height: 100%; }
+   </style>
+ </head>
+ <body>
+ 	<div class="container">
+ 		<div class="search-box">
+ 			<div>
+ 				<h1>Search</h1>
+ 				<form action="#">
+ 					<input type="text" placeholder="search" name="text-data" data-bind="value:query, valueUpdate:'keyup'" autocomplete="off">
+ 				</form>
+ 			</div>
+ 			<div class="content">
+ 				<ul data-bind="foreach:locations">
+ 					
+ 				</ul>
+ 			</div>
+ 		</div>
+ 		<div id="map"></div>
+ 	</div>
+  </body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="lib/bootstrap.min.js"></script>
+    <!--Knockout Library-->
+    <script src="lib/knockout-3.4.2.js"></script>
+    <script type="text/javascript" src="modal/placesmodal.js"></script>
+    <script type="text/javascript" src="js/mapdisplay.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB1nTYOyW0a9aSxqYY05nICV2ByW3mrS6w&v=3&callback=initMap" async defer>
+   </script>
+</html>
