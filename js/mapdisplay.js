@@ -1,59 +1,48 @@
-      var map;
-     // Function to initialize the map within the map div
-     function initMap() {
+function initMap(){
+  var places = []
+   $.getJSON('https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=27.9388763,-82.3242353&radius=500&type=shopping&keyword=mall&key=AIzaSyB1nTYOyW0a9aSxqYY05nICV2ByW3mrS6w',
+        function(data){
+          //console.log(data.results)
+          for(var i = 0; i<data.results.length;i++){
+             places.push({
+              lat:data.results[i].geometry.location.lat,
+              lng:data.results[i].geometry.location.lng,
+              placename:data.results[i].name,
+              placevicinity:data.results[i].vicinity
+            });
+          }
+          //console.log(places);
+          mapMarker(places);      
+         }
 
+         
+    );
+  map = new google.maps.Map(document.getElementById('map'), {
+        center: {lat: 27.9388763, lng: -82.3242353},
+        scrollwheel: true,
+        zoom: 10
+    });
 
-      var locations=[
-{
-  title:"International Plaza and Bay Street",
-  lat : 27.9640468,
-  lng : -82.5216049,
-  address:"2223 N West Shore Blvd (at Boy Scout Blvd), Tampa",
-  image: "images/nordstrom.jpg"
-},
-{
-  title:"Costco Wholesale",
-  lat : 27.92132,
-  lng : -82.331209,
-  address:"10921 Causeway Blvd, Brandon",
-  images: "images/nordstrom.jpg"
-},
-{
-  title:"Nordstrom International Plaza",
-  lat : 27.9640468,
-  lng : -82.5216049,
-  address:"2223 N West Shore Blvd, Tampa",
-  images: "images/nordstrom.jpg"
-},
-{
-  title:"Barnes & Noble",
-  lat : 27.9388763,
-  lng : -82.3242353,
-  address: "122 Brandon Town Center Dr (Brandon Square), Brandon",
-  images: "images/nordstrom.jpg"
-},
-{
-  title: "Sam's Club",
-  lat : 28.0970139,
-  lng : -82.4994832999999,
-  address:"15835 N Dale Mabry Hwy, Tampa",
-  images: "images/nordstrom.jpg"
-}],
-
-       map = new google.maps.Map(document.getElementById('map'), {
-         center: {lat: 40.74135, lng: -73.99802},
-         zoom: 14
-       });
+    infoWindow = new google.maps.InfoWindow({
+        content: ''
+    });
+    //console.log(places);
+    
+}
+function mapMarker(places){
+  console.log(places);
   var markers=[];
-  var largeInfowindow = new google.maps.InfoWindow();
   var bounds = new google.maps.LatLngBounds();
-  var imag = document.createElement('img');
-  for (var i =0; i < locations.length;i++){
-    var position = new google.maps.LatLng(locations[i].lat, locations[i].lng);
-    var title = locations[i].title;
+  var largeInfowindow = new google.maps.InfoWindow();
+  for(var i=0;i<places.length;i++){
+    var name = places[i].placename;
+    var vicinity = places[i].placevicinity;
+    var position = new google.maps.LatLng(places[i].lat, places[i].lng);
     var marker = new google.maps.Marker({
     map:map,
     position:position,
+    placename:name,
+    placevicinity:vicinity,
     title:'<img border ="0" align="LEFT" width="100" height="100" src="images/nordstrom.jpg" >',
     animation:google.maps.Animation.DROP,
     id:i
@@ -64,23 +53,18 @@
       populateInfoWindow(this, largeInfowindow)
     //largeInfowindow.open(map,marker);
     });
-    }
-    map.fitBounds(bounds);
-
-  };
-
+  }
+   map.fitBounds(bounds);
+}
   function populateInfoWindow(marker,infowindow){
     if(infowindow.marker != marker){
       infowindow.marker=marker;
-      infowindow.setContent('<div>' + marker.title + '</div>');
+      infowindow.setContent('<div>' + marker.placevicinity +' '+ '<h2>'+marker.placename+'</h2>'+'</div>');
       infowindow.open(map, marker);
       infowindow.addListener('closeclick', function(){
-        infowindow.setmarker=null;
+      infowindow.setmarker=null;
       });
     }
   }
-ko.applyBindings(initMap);
-
-
 
 
