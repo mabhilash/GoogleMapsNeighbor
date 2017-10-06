@@ -1,36 +1,3 @@
-      var locations=[
-{
-  title:"International Plaza and Bay Street",
-  lat : 27.9640468,
-  lng : -82.5216049,
-  address:"2223 N West Shore Blvd (at Boy Scout Blvd), Tampa",
-  image: "images/nordstrom.jpg"
-},
-{
-  title:"Costco Wholesale",
-  lat : 27.92132,
-  lng : -82.331209,
-  address:"10921 Causeway Blvd, Brandon",
-  images: "images/nordstrom.jpg"
-},
-{
-  title:"Nordstrom International Plaza",
-  lat : 27.9640468,
-  lng : -82.5216049,
-  address:"2223 N West Shore Blvd, Tampa",
-  images: "images/nordstrom.jpg"
-},
-{
-  title:"Barnes & Noble",
-  lat : 27.9388763,
-  lng : -82.3242353,
-  address: "122 Brandon Town Center Dr (Brandon Square), Brandon",
-  images: "images/nordstrom.jpg"
-},
-{
-  title: "Sam's Club",
-  lat : 28.0970139,
-  lng : -82.4994832999999,
-  address:"15835 N Dale Mabry Hwy, Tampa",
-  images: "images/nordstrom.jpg"
-}]
+var viewModel={
+  
+}
