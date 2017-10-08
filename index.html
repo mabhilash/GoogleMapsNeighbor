@@ -23,11 +23,11 @@
 </header>
 <aside class="col-sm-3" id="searchSection">
     <div class="row">
-        <input class="form-control" placeholder="Search for restaurants" data-bind="value: initVal, valueUpdate: 'afterkeydown'" />
+        <input class="form-control" placeholder="Search for restaurants" data-bind="value: initVal, valueUpdate: 'afterkeydown', textInput:'search'" />
     </div>
     <div class="row">
         <div class="list-group" data-bind="foreach: placesLoop">
-            <a href="#" class="list-group-item" data-bind="text:placename"></a>
+            <a href="#" class="list-group-item" data-bind="text:$data.placename, click:$parent.search"></a>
         </div>
     </div>
 </aside>

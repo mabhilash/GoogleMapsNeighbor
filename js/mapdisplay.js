@@ -1,4 +1,7 @@
 function initMap(){
+
+//var largeInfowindow = new google.maps.InfoWindow();
+var map;
     map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: 27.9388763, lng: -82.3242353},
         scrollwheel: true,
@@ -32,13 +35,14 @@ function initMap(){
     placesList(places);
  
   });
-}
+
 
 function placesList(places){
-  console.log(places)
+  //console.log(places)
   var viewmodel = {
     initVal:ko.observable(''),
     placesList:ko.observableArray(places)
+    
   };
       viewmodel.placesLoop = ko.dependentObservable(function() {
         var search = this.initVal().toLowerCase();
@@ -46,16 +50,12 @@ function placesList(places){
             return placename.placename.toLowerCase().indexOf(search) >= 0;
         });
     }, viewmodel);
-
-     
       ko.applyBindings(viewmodel);
 }
-
 
 function mapMarker(places){
   var markers=[];
   var bounds = new google.maps.LatLngBounds();
-  var largeInfowindow = new google.maps.InfoWindow();
   for(var i=0;i<places.length;i++){
     var name = places[i].placename;
     var vicinity = places[i].placevicinity;
@@ -72,8 +72,7 @@ function mapMarker(places){
     markers.push(marker);
     bounds.extend(marker.position);
     marker.addListener('click', function(){
-      populateInfoWindow(this, largeInfowindow)
-    //largeInfowindow.open(map,marker);
+      populateInfoWindow(this, infoWindow)
     });
   }
    map.fitBounds(bounds);
@@ -88,6 +87,6 @@ function populateInfoWindow(marker,infowindow){
       });
     }
   }
-
+}
 
  
